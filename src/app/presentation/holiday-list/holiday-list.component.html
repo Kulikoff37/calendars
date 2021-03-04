@@ -1,1 +1,9 @@
-<p>holiday-list works!</p>
+<div class="container">
+  <div class="card" *ngFor="let holiday of holidays">
+    <img src="https://www.intermed.com/content/uploads/holiday-schedule-intermed.jpg" alt="Avatar" style="width:100%">
+    <div class="container">
+      <h4><b>{{holiday.name}}</b></h4>
+      <p>{{holiday.description}}</p>
+    </div>
+  </div>
+</div>

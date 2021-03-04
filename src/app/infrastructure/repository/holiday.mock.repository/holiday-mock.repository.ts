@@ -1,32 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HolidayRepository } from '../../../core/repositories/Holiday.repository';
-import { HolidayModel } from '../../../core/domain/Holiday.model';
+import { HolidayRepository } from '../../../core/repositories/holiday.repository';
+import { HolidayModel } from '../../../core/domain/holiday.model';
 import { from, Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { HolidayMockEntity } from './holiday-mock-entity';
-import { HolidayMockRepositoryMapper } from './Holiday-mock-repository-mapper';
+import { usHolidays } from './holiday-mock-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HolidayMockRepository extends HolidayRepository {
 
-  private mapper = new HolidayMockRepositoryMapper();
 
-  Holidays = [];
+  Holidays = [...usHolidays];
 
   constructor() {
     super();
   }
 
-  getHolidayById(id: number): Observable<HolidayModel> {
+  getHolidayByCountryId(id: number): Observable<HolidayModel> {
     return from(this.Holidays)
       .pipe(filter((Holiday: HolidayMockEntity) => Holiday.id === id))
-      .pipe(map(this.mapper.mapFrom));
   }
 
   getAllHolidays(): Observable<HolidayModel> {
     return from(this.Holidays)
-      .pipe(map(this.mapper.mapFrom));
   }
 }
