@@ -10,7 +10,12 @@
 }
 
 .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-auto-rows: auto;
+  grid-gap: 10px;
+}
+
+.container-card {
   padding: 2px 16px;
-  display: flex;
-  flex-wrap: wrap;
 }
