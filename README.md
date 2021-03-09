@@ -1,6 +1,6 @@
 # Calendars
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.1.
+This is a training project.
 
 ## Development server
 

@@ -1,0 +1,16 @@
+# Run docker-compose up --build -d
+version: '3.6'
+
+services:
+  calendars:
+    image: calendars:0.0.1
+    build:
+      context: "."
+      args:
+        NODE_ENV: production
+    environment:
+      NODE_ENV: production
+    ports:
+      - target: 8080
+        published: 8080
+        protocol: tcp
