@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'calendars';
+  options = [
+    { id: 1, label: 'Россия' },
+    { id: 2, label: 'США' },
+    { id: 3, label: 'Афганистан' }
+  ];
+  control = new FormControl();
 }
