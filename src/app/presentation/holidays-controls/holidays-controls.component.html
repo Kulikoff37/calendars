@@ -1,0 +1,34 @@
+<div class="holiday-controls">
+  <div class="control">
+    <div class="control-label">
+      Страна
+    </div>
+    <input 
+      class="input" 
+      placeholder="Выберите страну..." 
+      [formControl]="form.get('country')" 
+      [appAutocomplete]="autocomplete">
+  </div>
+  <div class="control">
+    <div class="control-label">
+      Дата
+    </div>
+    <input 
+      class="input" 
+      placeholder="Выберите дату..." 
+      [formControl]="form.get('date')"
+      theme="dp-material"  
+      [dpDayPicker]="datePickerConfig" >
+  </div>
+</div>
+
+<app-autocomplete #autocomplete="appAutocomplete">
+  <ng-template appAutocompleteContent>
+    <ng-container *ngIf="(options | filter: form.get('country').value) as result">
+      <app-option *ngFor="let option of result" [value]="option.label">
+        {{ option.label }}
+      </app-option>
+      <app-option class="no-result" *ngIf="!result.length">Нет данных...</app-option>
+    </ng-container>
+  </ng-template>
+</app-autocomplete>

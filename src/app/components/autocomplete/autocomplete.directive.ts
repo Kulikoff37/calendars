@@ -17,7 +17,8 @@ import { filter, takeUntil } from "rxjs/operators";
 import { NgControl } from "@angular/forms";
 
 @Directive({
-  selector: "[appAutocomplete]"
+  selector: "[appAutocomplete]",
+  exportAs: "appAutocomplete"
 })
 export class AutocompleteDirective implements OnInit {
   @Input() appAutocomplete!: AutocompleteComponent;

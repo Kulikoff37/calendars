@@ -16,10 +16,10 @@ export class HolidayMockRepository extends HolidayRepository {
 
   getHolidayByCountryId(id: number): Observable<HolidayModel> {
     return from(this.Holidays)
-      .pipe(filter((Holiday: HolidayMockEntity) => Holiday.id === id))
+      .pipe(filter((Holiday: HolidayMockEntity) => Holiday.id === id));
   }
 
   getAllHolidays(): Observable<HolidayModel> {
-    return from(this.Holidays)
+    return from(this.Holidays);
   }
 }

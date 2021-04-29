@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { GetAllCountriesUsecase } from './core/usecases/get-all-countries.usecase';
+import { CountriesLocalRepository } from './infrastructure/repository/countries.local.repository/countries-local.repository';
+import { Options } from './presentation/models/options.interface';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +10,5 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'calendars';
-  options = [
-    { id: 1, label: 'Россия' },
-    { id: 2, label: 'США' },
-    { id: 3, label: 'Афганистан' }
-  ];
-  control = new FormControl();
+  title = 'Праздники стран мира';
 }

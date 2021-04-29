@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 
-export class GetAllHolidaysUsecase implements UseCase<void, CountryModel> {
+export class GetAllCountriesUsecase implements UseCase<void, CountryModel[]> {
 
   constructor(private countriesRepositiry: CountryRepository) { }
 
-  execute(): Observable<CountryModel> {
+  execute(): Observable<CountryModel[]> {
     return this.countriesRepositiry.getAllCountries();
   }
 }
