@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { UseCase } from '../base/use-case';
 import { HolidayModel } from '../domain/holiday.model';
 import { Observable } from 'rxjs';

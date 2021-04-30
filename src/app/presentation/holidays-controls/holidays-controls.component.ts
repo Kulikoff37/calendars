@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { debounceTime, map, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { GetAllCountriesUsecase } from 'src/app/core/usecases/get-all-countries.usecase';
 import { CountriesLocalRepository } from 'src/app/infrastructure/repository/countries.local.repository/countries-local.repository';
 import { Options } from '../models/options.interface';
+import { UserSelectedParams } from '../models/params.interface';
+import { StateService } from '../state-service';
 
 @Component({
   selector: 'app-holidays-controls',
@@ -23,7 +25,10 @@ export class HolidaysControlsComponent implements OnInit {
 
   ngUnsubscribe$ = new Subject();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private stateService: StateService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.getCountries();
@@ -33,9 +38,11 @@ export class HolidaysControlsComponent implements OnInit {
       .pipe(
         takeUntil(this.ngUnsubscribe$),
       )
-      .subscribe(({date, country}) => {
-        if (date && country) {
-          console.log('download')
+      .subscribe((values: UserSelectedParams) => {
+        const {date, country} = values;
+        const shortName = this.options.find(opt => opt.label === country)?.name;
+        if (date && shortName ) {
+          this.stateService.fetchHolidays({date, shortName})
         }
       })
   }
@@ -48,9 +55,10 @@ export class HolidaysControlsComponent implements OnInit {
         takeUntil(this.ngUnsubscribe$),
       )
       .subscribe((countries) => {
-        this.options = countries.map(({ SHORTNAME }, idx) => ({
+        this.options = countries.map(({ SHORTNAME, ALFA2 }, idx) => ({
           id: idx + 1,
-          label: SHORTNAME
+          label: SHORTNAME,
+          name: ALFA2
         }))
       })
   }
